@@ -1,0 +1,15 @@
+services:
+  chromium:
+    image: lscr.io/linuxserver/chromium:latest
+    container_name: chromium
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Etc/UTC"
+      CUSTOM_USER: "${CHROMIUM_USER:?Set CHROMIUM_USER in .env}"
+      PASSWORD: "${CHROMIUM_PASSWORD:?Set CHROMIUM_PASSWORD in .env}"
+    volumes:
+      - /tmp/chromium-config:/config
+    network_mode: host
+    shm_size: "1gb"
+    restart: unless-stopped
